@@ -25,10 +25,6 @@ GPU: Apple M4 Max (40) @ 1.58 GHz [Integrated]
 Memory: 48.24 GiB / 128.00 GiB (38%)
 Swap: 871.00 MiB / 2.00 GiB (43%)
 Disk (/): 1.90 TiB / 3.63 TiB (52%) - apfs [Read-only]
-Local IP (utun6): 100.91.18.44/10
-Battery (bq40z651): 100% [AC connected]
-Power Adapter: 85W
-Locale: ja_JP.UTF-8
 ```
 
 ## Installation

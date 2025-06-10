@@ -1,16 +1,75 @@
 # Quick Start
+
+## Tested on
+
+```sh
+% fastfetch
+funa@funasoulM4
+---------------
+OS: macOS Sequoia 15.5 arm64
+Host: MacBook Pro (14-inch, 2024, Three Thunderbolt 5 ports)
+Kernel: Darwin 24.5.0
+Uptime: 19 days, 2 hours, 9 mins
+Packages: 777 (macports)
+Shell: zsh 5.9
+Display (EV3895): 3840x1600 @ 60 Hz in 38" [External]
+DE: Aqua
+WM: Quartz Compositor 278.4.7
+WM Theme: Multicolor (Dark)
+Font: .AppleSystemUIFont [System], Helvetica [User]
+Cursor: Fill - Black, Outline - White (32px)
+Terminal: kitty 0.42.0
+Terminal Font: Menlo-Regular (14pt)
+CPU: Apple M4 Max (12+4) @ 4.51 GHz
+GPU: Apple M4 Max (40) @ 1.58 GHz [Integrated]
+Memory: 48.24 GiB / 128.00 GiB (38%)
+Swap: 871.00 MiB / 2.00 GiB (43%)
+Disk (/): 1.90 TiB / 3.63 TiB (52%) - apfs [Read-only]
+Local IP (utun6): 100.91.18.44/10
+Battery (bq40z651): 100% [AC connected]
+Power Adapter: 85W
+Locale: ja_JP.UTF-8
+```
+
 ## Installation
+
 It's strongly recommended to setup a fresh virtual environment by typing
 
-    virtualenv -p python3 feyn
-    source feyn/bin/activate
-    
-First install numpy with `pip install numpy`.
-The 'aifeynman' package is available on PyPI and can be installed with `pip install aifeynman`.
+```sh
+## Prepare ports
+% sudo port install python39
+% sudo port install gcc14
+% sudo port select gcc mp-gcc14 # activate gfortran
+
+## clone repo
+% cd ~/git
+% git clone https://github.com/funasoul/AI-Feynman.git
+% cd AI-Feynman
+% python3.9 -m venv feyn
+% source ./feyn/bin/activate
+
+## install!
+(feyn)% pip install numpy
+(feyn)% pip install torchvision
+(feyn)% pip install scikit-learn
+(feyn)% pip install matplotlib
+(feyn)% pip install seaborn
+(feyn)% python setup.py install
+
+## test
+(feyn)% python
+```
+
+```ipython
+>>> import aifeynman
+>>> aifeynman.__version__
+'2.0.0'
+```
 
 Note that for now, AI Feynman is supported only for Linux and Mac environments.
 
 ## First example
+
 Move into a clean directory and run the following Python commands:
 
     import aifeynman
@@ -30,7 +89,7 @@ Please check [this Medium article](https://towardsdatascience.com/ai-feynman-2-0
 
 In order to get started, run compile.sh to compile the fortran files used for the brute force code.
 
-ai_feynman_example.py contains an example of running the code on some examples (found in the example_data directory). The examples correspond to the equations I.8.14, I.10.7 and I.50.26 in Table 4 in the paper. More data files on which the code can be tested on can be found in the [Feynman Symbolic Regression Database](https://space.mit.edu/home/tegmark/aifeynman.html). 
+ai_feynman_example.py contains an example of running the code on some examples (found in the example_data directory). The examples correspond to the equations I.8.14, I.10.7 and I.50.26 in Table 4 in the paper. More data files on which the code can be tested on can be found in the [Feynman Symbolic Regression Database](https://space.mit.edu/home/tegmark/aifeynman.html).
 
 The main function of the code, called by the user, has the following parameters:
 
@@ -43,7 +102,7 @@ The main function of the code, called by the user, has the following parameters:
 * vars_name - name of the variables appearing in the equation (inluding the name ofthe output variable). This should be passed as a list of strings, with the name of the variables appearing in the same order as they are in the file containing the data
 * test_percentage - percentage of the input data to be kept aside and used as the test set
 
-The data file to be analyzed should be a text file with each column containing the numerical values of each (dependent and independent) variable. The solution file will be saved in the directory called "results" under the name solution_{filename}. The solution file will contain several rows (corresponding to each point on the Pareto frontier), each row showing: 
+The data file to be analyzed should be a text file with each column containing the numerical values of each (dependent and independent) variable. The solution file will be saved in the directory called "results" under the name solution_{filename}. The solution file will contain several rows (corresponding to each point on the Pareto frontier), each row showing:
 
 * the mean logarithm in based 2 of the error of the discovered equation applied to the input data (this can be though of as the average error in bits)
 * the cummulative logarithm in based 2 of the error of the discovered equation applied to the input data (this can be though of as the cummulative error in bits)
@@ -53,7 +112,7 @@ The data file to be analyzed should be a text file with each column containing t
 
 If test_percentage is different than zero, one more number is added in the beginning of each row, showing the error of the discovered equation on the test set.
 
-ai_feynman_terminal_example.py allows calling the aiFeynman function from the command line. 
+ai_feynman_terminal_example.py allows calling the aiFeynman function from the command line.
 (e.g. python ai_feynman_terminal_example.py --pathdir=../example_data/ --filename=example1.txt). Use python ai_feynman_terminal_example.py --help to display all the available parameters that can be passed to the function.
 
 # Citation

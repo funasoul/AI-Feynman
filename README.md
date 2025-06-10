@@ -49,6 +49,7 @@ It's strongly recommended to setup a fresh virtual environment by typing
 % source ./feyn/bin/activate
 
 ## install!
+## do not execute 'pip install --upgrade pip setuptools'!!
 (feyn)% pip install numpy
 (feyn)% pip install torchvision
 (feyn)% pip install scikit-learn
